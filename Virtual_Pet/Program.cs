@@ -67,6 +67,7 @@ namespace Virtual_Pet
                         break;
                     case "2":
                         Console.WriteLine("You choose to give your pet something to drink");
+                        firstPet.PetDrink();
                         break;
                     case "3":
                         Console.WriteLine("You choose to allow your pet to rid clear its bowels");

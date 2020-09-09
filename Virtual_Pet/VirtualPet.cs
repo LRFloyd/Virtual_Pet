@@ -13,7 +13,7 @@ namespace Virtual_Pet
         protected int petWaste = 0;
         protected bool petSleep = false;
         protected bool isAlive = true;
-        protected string petBoredom = "Happy";
+        protected string petMood = "Happy";
 
         //class properties
         
@@ -54,10 +54,10 @@ namespace Virtual_Pet
         
         public bool IsAlive { get; set; }
 
-        public string PetBoredom
+        public string PetMood
         {
-            get { return this.petBoredom; }
-            set { this.petBoredom = value; }
+            get { return this.petMood; }
+            set { this.petMood = value; }
         }
 
         //class constructors
@@ -66,7 +66,7 @@ namespace Virtual_Pet
            //default constructor
         }
 
-        public VirtualPet(string petName, string animalType, int petHunger, int petThirst, bool petSleep, int petWaste, string petBoredom, bool isAlive)
+        public VirtualPet(string petName, string animalType, int petHunger, int petThirst, bool petSleep, int petWaste, string petMood, bool isAlive)
         {
             this.petName = petName;
             this.animalType = animalType;
@@ -74,16 +74,17 @@ namespace Virtual_Pet
             this.petThirst = petThirst;
             this.petSleep = petSleep;
             this.petWaste = petWaste;
-            this.petBoredom = petBoredom;
+            this.petMood = petMood;
             this.isAlive = isAlive;
         }
 
         //class methods
-        public void PetFeed()
+        public void PetFeed() //method used to feed the pet
         {
             Console.WriteLine("What would you like to feed your pet? Please select one of the following numbers");
             Console.WriteLine("\n1.)meal" + "\n2.)snack" + "\n3.)diet");
             int food = 0;
+            //checking user input before passing food variable to switch case
             if (Console.ReadLine() == "")
             {
                 food.ToString();
@@ -92,6 +93,7 @@ namespace Virtual_Pet
             {
                 food = int.Parse(Console.ReadLine());
             }
+            
             switch (food)
             {
                 case 1:
@@ -111,7 +113,7 @@ namespace Virtual_Pet
                 case 3:
                     PetHunger += 1;
                     PetThirst -= 1;
-                    PetBoredom = "Mad";
+                    PetMood = "Mad";
                     Console.WriteLine("Your pet was feed but is annoyed");
                     break;
 
@@ -125,7 +127,48 @@ namespace Virtual_Pet
             Console.Clear();
         }
 
-        public string SelectAnimal(string reply)
+        public void PetDrink()
+        {
+            Console.WriteLine("What would you like to feed your pet? Please select one of the following numbers");
+            Console.WriteLine("\n1.)water"  + "\n2.)bubbly");
+            int drink = 0;
+            //checking user input before passing food variable to switch case
+            if (Console.ReadLine() == "")
+            {
+                drink.ToString();
+            }
+            else
+            {
+                drink = int.Parse(Console.ReadLine());
+            }
+            
+            switch (drink)
+            {
+                case 1:
+                    PetHunger += 1;
+                    PetThirst -= 2;
+                    PetWaste = 3;
+                    Console.WriteLine("Your pet is now full");
+                    break;
+
+                case 2:
+                    PetHunger += 1;
+                    PetThirst -= 2;
+                    PetWaste += 1;
+                    Console.WriteLine("Your pet is now under the influence");
+                    break;
+
+                default:
+                    Console.WriteLine("I thought you said you wanted to give  your pet a drink");
+                    PetHunger -= 3;
+                    PetThirst -= 3;
+                    PetWaste += 3;
+                    break;
+            }
+            Console.Clear();
+        }
+
+        public string SelectAnimal(string reply)//method used to display animal type also will help to print ascii art
         {            
             switch (reply)
                 {
@@ -150,9 +193,18 @@ namespace Virtual_Pet
         
         public void Mood()
         {
-            //add things
-
-
+            if ((PetHunger >= 2) && (PetThirst >= 2))
+            {
+                PetMood = "Happy";
+            }
+            else if ((PetHunger <= 1) && (PetThirst <= 1))
+            {
+                PetMood = "Annoyed";
+            }
+            else if ((PetMood == "Annoyed") && (PetHunger <= 0))
+            {
+                
+            }
         }
 
         public void Tick()
@@ -162,7 +214,7 @@ namespace Virtual_Pet
             petHunger += 1;
         }
 
-        public void Death()
+        public void Death()//animal death method
         {
             if (isAlive)
             {
@@ -170,11 +222,11 @@ namespace Virtual_Pet
             }
         }
 
-        public void UI()
+        public void UI()//animal UI
         {
             Console.WriteLine("Name: " + petName);
             Console.WriteLine("Pet Type: " + animalType );
-            switch (animalType)
+            switch (animalType)//checks the animal type then calls the method respectively
             {
                 case "CAT":
                     CatAscii();
@@ -197,6 +249,7 @@ namespace Virtual_Pet
             Console.WriteLine("Pet Mood: " + petBoredom);
         }
 
+        //animal ascii art methods
         protected void CatAscii()
         {
             Console.WriteLine(@" /\_/\ ");
