@@ -28,7 +28,7 @@ namespace Virtual_Pet
             set { animalType = value; }
         }
 
-        public int PetHunger
+        protected int PetHunger
         {
             get { return this.petHunger; }
             set { this.petHunger = value; }

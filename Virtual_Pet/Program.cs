@@ -15,7 +15,7 @@ namespace Virtual_Pet
             Console.WriteLine("\t" + @"     \ \/ / | | '__| __| | | |/ _` | | |  ___/ _ \ __|");
             Console.WriteLine("\t" + @"      \  /  | | |  | |_| |_| | (_| | | | |  |  __/ |_ ");
             Console.WriteLine("\t" + @"       \/   |_|_|   \__|\__,_|\__,_|_| |_|   \___|\__|");
-            Console.WriteLine("\t" +"By LRFloyd");
+            Console.WriteLine("\t" +"Created By LRFloyd");
             Console.ReadKey();
             Console.Clear();
 
